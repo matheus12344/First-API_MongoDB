@@ -49,19 +49,19 @@ class RestaurantsController {
     }    
        
 
-    async find(request: Request, response: Response) {
+    async find(request: Request, response: Response) { //Função para Achar os Dados
         try {
             const restaurant = await Restaurantes.find();
             return response.json(restaurant);
         } catch (error) {
-            return response.status(500).send({
+            return response.status(500).send({  //retorna um erro, caso a conexão falhe
                 error: "Something wrong happened, try again",
                 message: error
             });
         }
     }
 
-    async create(request: Request, response: Response) {
+    async create(request: Request, response: Response) { //Função de Criar dados 
         const {name, category, address} = request.body;
 
         try {
@@ -75,7 +75,7 @@ class RestaurantsController {
             }
 
 
-            const restaurant = await Restaurantes.create({
+            const restaurant = await Restaurantes.create({ //parâmetros a serem cadastrados
                 name,
                 category,
                 address
@@ -83,7 +83,7 @@ class RestaurantsController {
 
             return response.json(restaurant);
 
-        } catch (error) {
+        } catch (error) { // retorna um erro caso tenha falha no cadastro dos dados
             return response.status(500).send({
                 error: "Registration failed",
                 message: error
